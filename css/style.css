@@ -183,6 +183,9 @@
 	header.major {
 		text-align: center;
 		margin: 0 0 4em 0;
+		max-width: 70%;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 		header.major h2 {
