@@ -1,18 +1,5 @@
-banner
-	on hover in banner needs to be darker
-	buttons & text in banner are difficult to read
-
-header
-	adjust font colour
-	
-challenges
-	center
-
 Partnerships & Sponsors
 	learn more button should connect to sponsors page
-	
-css images class
-	image sizes are in percentage, think we should set a flat size so they match up
 	
 keywords
 	develop

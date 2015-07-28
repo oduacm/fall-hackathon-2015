@@ -781,7 +781,7 @@
 			input[type="reset"].alt:hover,
 			input[type="button"].alt:hover,
 			.button.alt:hover {
-				background-color: rgba(144, 144, 144, 0.075);
+				background-color: rgba(124, 135, 142, 0.075);
 			}
 
 			input[type="submit"].alt:active,
@@ -1009,6 +1009,8 @@
 
 		#banner h2, #banner h3, #banner h4, #banner h5, #banner h6 {
 			color: #ffffff;
+			background-color: #000;
+			/*text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;*/
 		}
 
 		#banner .button.alt {
@@ -1059,7 +1061,17 @@
 		#footer a {
 			color: inherit;
 		}
+		
+			#footer a:hover{
+				color: #000;
+			}
 
+		#footer .socialmedia{
+			text-align: center;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		
 		#footer .copyright {
 			color: #bbb;
 			font-size: 0.9em;
