@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+# docker run -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_USER=admin -e MYSQL_PASSWORD=password -d mysql
+# docker run -d -p 80:80 --name lamp-stack --link some-mysql:mysql -v /Users/jha/Documents/dev/oduacm/odu-hackathon-site/:/app tutum/apache-php
+
+docker run -d -p 80:80 -p 3306:3306 -e MYSQL_PASS="password" -v $1:/app tutum/lamp 
