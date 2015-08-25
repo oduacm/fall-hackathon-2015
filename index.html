@@ -1,71 +1,48 @@
-<!--
-In production, rename file to index.php and uncomment this code  
-<?php 
-// db credentials
-include_once 'config.php';
-
-// db connection
-$pdo = new PDO($config['db']['connString'], $config['db']['username'], $config['db']['password']);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-if(isset($_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['email'], $_POST['diet_res'], $_POST['shirt_size'])){
-  //echo '<pre>'.print_r($_POST, true).'</pre>';
-  
-  $stmt = $pdo->prepare ("INSERT INTO users (fname, lname, age, email, resume_path, diet_res, shirt_size) VALUES (:fname, :lname, :age, :email, :resume_path, :diet_res, :shirt_size)");
-  $stmt->bindParam(':fname', $_POST['fname']);
-  $stmt->bindParam(':lname', $_POST['lname']);
-  $stmt->bindParam(':age', $_POST['age']);
-  $stmt->bindParam(':email', $_POST['email']);
-  $stmt->bindValue(':resume_path', 'resumes/'.$_FILES['resume']['name']);
-  $stmt->bindParam(':diet_res', $_POST['diet_res']);
-  $stmt->bindParam(':shirt_size', $_POST['shirt_size']);
-
-  $stmt->execute();
-
-  move_uploaded_file($_FILES['resume']['tmp_name'], "resumes/".$_FILES['resume']['name']);
-}
-
-?>-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Monarchs Hack</title>
-    <!-- Third party Styles--> 
+    <!-- HOSTED STYLES --> 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 
-    <!-- Our Styles --> 
+    <!-- LOCAL STYLES --> 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/timeline.css"/>
 
+    <!-- LOCAL SCRIPTS -->
 		<script src="js/modernizr.custom.js"></script>
 
   </head>
 
   <body data-spy="scroll" data-target="#navbar">
-  
+ 
+    <!-- NAVIGATION -->
     <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
       <ul class="nav navbar-nav">
         <li><a href="#home"><i class="glyphicon glyphicon-home"></i></a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#schedule">Schedule</a></li>
         <li><a href="#sponsors">Sponsors</a></li>
-        <li><a href="#register">Register</a></li>
+        <li><a href="register.php">Register</a></li>
       </ul>
-    </nav>
+    </nav><!-- end NAV -->
 
+    <!-- BG JUMBOTON HOME -->
     <div class="bg"></div>
     <div class="jumbotron">
       <div id="home" class="container">
         <h1>Monarchs Hack the Campus</h1>
-		<h2>October 2-4, 2015</h2>
+        <h2>October 2-4, 2015</h2>
         <p>
-          <a href="#register" class="btn btn-custom">Register</a>
+          <a href="register.php" class="btn btn-custom">Register</a>
           <a href="#contact" class="btn btn-custom">Contact</a>
         </p> 
-      </div>
-    </div>
+      </div><!-- end home -->
+    </div><!-- end jumbotron -->
 
+    <!-- ABOUT -->
     <div id="about" class="container">
       <h1>About</h1>
       <p>
@@ -73,15 +50,17 @@ if(isset($_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['email'], $_POS
 		opportunity to come and address multiple challenges. Each interesting, unique, judged, and awarded separately from the others.  
           <h3>#HappyHacking</h3>      
       </p>
-    </div>
+    </div><!-- end About -->
 
+    <!-- SCHEDULE -->
     <div id="schedule" class="container">
       <h1>Schedule</h1>
     
       <div id="stage"></div>
     
-    </div>
+    </div><!-- END SCHEDULE -->
 
+    <!-- SPONSORS -->
     <div id="sponsors" class="container">
       <h1>Sponsors</h1>
 		<p>
@@ -103,76 +82,20 @@ if(isset($_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['email'], $_POS
 				<li>Award the winner(s) for their hard work</li>
 			</ol>
 		</p>
-    </div>
+    </div><!-- end sponsors -->
 
-    <div id="register-container" class="container-fluid"> 
-      <div id="register" class="container">
-      <h1>Register</h1>
-
-      <form method="POST" enctype="multipart/form-data">
-        
-        <div class="form-group"> 
-          <label>First Name</label>
-          <input class="form-control" type="text" name="fname"/>
-        </div> 
-
-        <div class="form-group"> 
-          <label>Last Name</label>
-          <input class="form-control" type="text" name="lname"/>
-        </div>
-        
-        <div class="form-group"> 
-          <label>Email</label>
-          <input class="form-control" type="email" name="email"/>
-        </div>
-        
-        <div class="form-group"> 
-          <label for="age">Age ( 18 and Over ) <label>
-          <input id="age" class="form-control" type="number" name="age"/>
-        </div>
-        
-        <div class="form-group"> 
-          <label>Optional - Resume(PDF preferred)</label>
-          <input class="form-control" type="file" name="resume"/>
-        </div>
-
-        <div class="form-group"> 
-          <label>Dietary Restrictions</label>
-          <select class="form-control" name="diet_res">
-            <option value="none">None</option>
-            <option value="vegan">Vegan</option>
-            <option value="vegitarian">Vegetarian</option>
-            <option value="no-gluten">Gluten Free</option>
-          </select>
-        </div>
-
-        <div class="form-group"> 
-          <label>T-Shirt Size</label>
-          <select class="form-control" name="shirt_size">
-            <option value="s">Small</option>
-            <option value="m">Medium</option>
-            <option value="l">Large</option>
-            <option value="xl">X-Large</option>
-            <option value="xxl">XX-Large</option>
-          </select>
-        </div>
-
-        <div class="form-group"> 
-          <button class="btn btn-primary" type="submit">Register</button>
-        </div>
-      </form>
-      </div>
-    </div>
-
+  <!-- FOOTER -->
   <div id="footer" class="container-fluid">
     <div class="container">
       Old Dominion ACM &copy; 2015
     </div>
-  </div>
-  
+  </div><!-- end footer -->
+ 
+  <!-- HOSTED SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+  <!-- LOCAL SCRIPTS -->
   <script src="js/main.js"></script>
   <script src="js/interactive-svg.js"></script>
 
