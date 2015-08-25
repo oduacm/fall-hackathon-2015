@@ -64,6 +64,7 @@ if(isset($_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['email'], $_POS
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#schedule">Schedule</a></li>
         <li><a href="index.html#sponsors">Sponsors</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
         <li><a href="register.php">Register</a></li>
       </ul>
     </nav>
