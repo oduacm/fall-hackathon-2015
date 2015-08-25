@@ -3,38 +3,42 @@
 include_once 'config.php';
 
 // db connection
-$pdo = new PDO($config['db']['connString'], $config['db']['username'], $config['db']['password']);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try {
+  $pdo = new PDO($config['db']['connString'], $config['db']['username'], $config['db']['password']);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if(isset($_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['email'], $_POST['diet_res'], $_POST['shirt_size'])) {
-  //make user resume name string 
-  $resume_dir = "resumes"; 
-  $resume_filename = $_POST['fname'].'_'.$_POST['lname'].'_'.$_POST['age'].'.'.end(explode('.',$_FILES['resume']['name']));
-    
-  $stmt = $pdo->prepare ("INSERT INTO users (fname, lname, age, email, resume_path, diet_res, shirt_size) VALUES (:fname, :lname, :age, :email, :resume_path, :diet_res, :shirt_size)");
-  $stmt->bindParam(':fname', $_POST['fname']);
-  $stmt->bindParam(':lname', $_POST['lname']);
-  $stmt->bindParam(':age', $_POST['age']);
-  $stmt->bindParam(':email', $_POST['email']);
-  $stmt->bindValue(':resume_path', $resume_filename);
-  $stmt->bindParam(':diet_res', $_POST['diet_res']);
-  $stmt->bindParam(':shirt_size', $_POST['shirt_size']);
+  if(isset($_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['email'], $_POST['diet_res'], $_POST['shirt_size'])) {
+    //make user resume name string 
+    $resume_dir = "resumes"; 
+    $resume_filename = $_POST['fname'].'_'.$_POST['lname'].'_'.$_POST['age'].'.'.end(explode('.',$_FILES['resume']['name']));
+      
+    $stmt = $pdo->prepare ("INSERT INTO users (fname, lname, age, email, resume_path, diet_res, shirt_size) VALUES (:fname, :lname, :age, :email, :resume_path, :diet_res, :shirt_size)");
+    $stmt->bindParam(':fname', $_POST['fname']);
+    $stmt->bindParam(':lname', $_POST['lname']);
+    $stmt->bindParam(':age', $_POST['age']);
+    $stmt->bindParam(':email', $_POST['email']);
+    $stmt->bindValue(':resume_path', $resume_filename);
+    $stmt->bindParam(':diet_res', $_POST['diet_res']);
+    $stmt->bindParam(':shirt_size', $_POST['shirt_size']);
 
-  $stmt->execute();
+    $stmt->execute();
 
-  move_uploaded_file($_FILES['resume']['tmp_name'], "$resume_dir/$resume_filename");
- /* 
-  $headers = 'From: '.$_POST['email'] . "\r\n" .
-      'Reply-To: '.$_POST['email'] . "\r\n" .
-      'X-Mailer: PHP/' . phpversion();
+    move_uploaded_file($_FILES['resume']['tmp_name'], "$resume_dir/$resume_filename");
+   /* 
+    //use uniqueid to generate key for user email confirmation
+    $headers = 'From: '.$_POST['email'] . "\r\n" .
+        'Reply-To: '.$_POST['email'] . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
 
-  $confirm_msg = 'Thank you for regisitering for Old Domimion ACM\'s Monarchs hack the campus.<a href="">Click here</a> to confirm it is really you.';
+    $confirm_msg = 'Thank you for regisitering for Old Domimion ACM\'s Monarchs hack the campus.<a href="">Click here</a> to confirm it is really you.';
 
-  mail($_POST['email'], 'Monarchs Hack Registration', $confirm_msg, $headers);
-  header('Location: thankyou.php?name='.urlencode($_POST['fname'].' '.$_POST['lname']));
-  */
-  header('Location: index.html');
-
+    mail($_POST['email'], 'Monarchs Hack Registration', $confirm_msg, $headers);
+    header('Location: thankyou.php?name='.urlencode($_POST['fname'].' '.$_POST['lname']));
+    */
+    header('Location: index.html');
+  }
+} catch (PDOException $e) {
+  echo '<div class="alert alert-danger">Connection Failed: '.$e->getMessage().'</div>';
 }
 
 ?>
