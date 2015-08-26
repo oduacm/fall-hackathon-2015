@@ -1,6 +1,3 @@
-# fall-hackathon-2015
+build-env-docker is a helper script for me, setup a php/apache/mysql env in docker.  
 
-To change background image, go to line 981 in
-css/style.css. Looks like this
-		background-image: url("../images/banner.jpg");
-
+the sql dump file is also to help with me setting up a docker env
